@@ -6,7 +6,7 @@ LDFLAGS=
 LLVM_CFLAGS=$(shell llvm-config-3.2 --cxxflags)
 LLVM_LDFLAGS=$(shell llvm-config-3.2 --ldflags)
 
-LIBS=$(shell llvm-config-3.2 --libs Core Object)
+LIBS=$(shell llvm-config-3.2 --libs all-targets Core Object)
 
 default: dumper
 
