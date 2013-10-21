@@ -122,7 +122,14 @@ namespace {
             if (syms.empty())
                 syms.push_back(std::make_pair(0, name));
 
-            OwningPtr<const MCAsmInfo> ai(target->createMCAsmInfo(triple));
+            OwningPtr<const MCRegisterInfo> mri(target->createMCRegInfo(triple));
+            if (!mri)
+            {
+                errs() << "error: no register info for target " << triple << "\n";
+                return;
+            }
+
+            OwningPtr<const MCAsmInfo> ai(target->createMCAsmInfo(*mri, triple));
             if (!ai)
             {
                 errs() << "error: no assembly info for target " << triple << "\n";
@@ -140,13 +147,6 @@ namespace {
             if (!da)
             {
                 errs() << "error: no disassembler for target " << triple << "\n";
-                return;
-            }
-
-            OwningPtr<const MCRegisterInfo> mri(target->createMCRegInfo(triple));
-            if (!mri)
-            {
-                errs() << "error: no register info for target " << triple << "\n";
                 return;
             }
 

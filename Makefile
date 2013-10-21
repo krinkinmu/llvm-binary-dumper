@@ -3,10 +3,10 @@ CXX=g++
 CFLAGS=-c -Wall -Werror -pedantic -std=c++11
 LDFLAGS=
 
-LLVM_CFLAGS=$(shell llvm-config-3.2 --cxxflags)
-LLVM_LDFLAGS=$(shell llvm-config-3.2 --ldflags)
+LLVM_CFLAGS=$(shell llvm-config-3.4 --cxxflags)
+LLVM_LDFLAGS=$(shell llvm-config-3.4 --ldflags)
 
-LIBS=$(shell llvm-config-3.2 --libs all-targets Core Object)
+LIBS=$(shell llvm-config-3.4 --libs all-targets Core Object)
 
 default: dumper
 
